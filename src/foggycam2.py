@@ -312,9 +312,14 @@ class FoggyCam(object):
             # Compile video
             if self.ffmpeg_path:
               camera_buffer_size = len(camera_buffer[camera['uuid']])
+
+              video_msg = ""
+              if camera_buffer_size > self.nest_camera_buffer_threshold:
+                video_msg = ", compiling video"
+
               print(
                 f"<> INFO: {self.now_time()} [ {threading.current_thread().name} ] "
-                f"Camera buffer size for {camera_name}: {camera_buffer_size}"
+                f"Camera buffer size for {camera_name}: {camera_buffer_size}{video_msg}"
               )
 
               if camera_buffer_size < self.nest_camera_buffer_threshold:
