@@ -88,12 +88,13 @@ class FoggyCam(object):
             f"On Debian try: 'sudo apt-get install ffmpeg'\n"
             f"On MacOS try: 'brew install ffmpeg'")
 
-    if self.time_stamp and imagemagic:
-      self.convert_path = imagemagic
-    else:
-      print(f"<> WARNING: could not find '/usr/bin/convert' skip applying time stamp. Try installing it:\n"
-            f"On Debian try: 'sudo apt-get install imagemagick'\n"
-            f"On MacOS try: 'brew install imagemagick ghostscript'")
+    if self.time_stamp:
+      if imagemagic:
+        self.convert_path = imagemagic
+      else:
+        print(f"<> WARNING: could not find '/usr/bin/convert' skip applying time stamp. Try installing it:\n"
+              f"On Debian try: 'sudo apt-get install imagemagick'\n"
+              f"On MacOS try: 'brew install imagemagick ghostscript'")
 
   @staticmethod
   def run_requests(url, method, headers=None, params=None, payload=None):
